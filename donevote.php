@@ -1,0 +1,110 @@
+<?php 	
+require_once 'configuration.php';
+session_start();
+    //$_SESSION['StudentID']=15011016;      
+	if(isset($_SESSION['StudentID'])){
+		  $id = $_SESSION['StudentID'];
+		   $view = "SELECT * FROM `regperson` WHERE StudentID = $id ";
+		   $view1 = $conn->query($view);
+		   if(isset($view1)) {
+                    foreach ($view1 as $row) {
+                        $regID =$row['regID'];
+                        $StudentID= $row['StudentID'];
+                        $Fname = $row['Fname'];
+                        $Lname= $row['Lname'];
+                        $Gender =$row['Gender'];
+                        $Class= $row['Class'];
+                        $Privileg= $row['Privileg'];
+                        $vote= $row['vote'];
+						$result= $row['result'];
+					}
+		   }
+if($result == 1 )
+		{
+			header("location:result.php");
+		}
+	}else{header("location:login.php");
+				}		
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="Voting UAUT" content="">
+    <meta name="Ebenezery Jimmy" content="">
+
+    <title>MNMA Voting System</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="css/metisMenu.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+
+ <link href="css/ben.css" rel="stylesheet">
+
+</head>
+
+<body>
+       <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+               <img class="img-circle img-responsive img-center" id="picha"src="index.png"/>
+			   <a class="navbar-brand" href="">MNMA Voting System</a>
+            </div>
+                <?php echo '<ul class="nav navbar-top-links navbar-right"><li style="float:right; color:#fff; font-weight:bold;">'.$Fname.' '.$Lname.'</li></ul>' ?> 
+
+               
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                         <li >
+                            <a href="Vote.php" id="ggg1">VOTE</a>
+                        </li>
+						<li>
+                            <a href="passChange.php" id="ggg">CHANGE PASSWORD</a>
+                        </li>
+                       
+						 <li><form role="form" method="post" enctype="">
+                           <input type="submit" class="btn btn-lg btn-info btn-block"  id="ggg" value="LOG OUT" name="logout">
+						   </form>
+                        </li>
+                       
+ 
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+    <div id="page-wrapper">
+            <div class="row">
+                  <div class="well">
+                                <h4>Vote Info</h4>
+                                <p>Your Vote submited successful..!! Thank you for voting and please come next time to see the result</p>
+                                
+                            </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->	
+</div>
+<hr>
+<!-- Footer -->
+    <footer>
+              
+				Copyright &copy; MNMA student Organisation
+				<div style="float:right;" class="nav navbar-top-links navbar-right">Created by MNMA student 2023<br>rukia@live.de</div>
+               
+     </footer>			
+</body>
+
+</html>
